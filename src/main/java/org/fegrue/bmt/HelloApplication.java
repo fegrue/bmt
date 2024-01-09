@@ -25,37 +25,25 @@ public class HelloApplication extends Application {
     }
 
 
-    public void start(Stage stage) {
+    public void start(Stage stage) throws IOException {
+
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("main.fxml"));
+
+
         calculate c = new calculate( 11, 100);
         c.createArray();
         table t = new table(c.l, 50);
 
-        stage.setTitle("Multiplication table");
-        // x-axis representation
-        NumberAxis x = new NumberAxis();
-        x.setLabel("Total Number of ");
-
-        // y axis representation
-        NumberAxis y = new NumberAxis();
-        y.setLabel("Students per section");
-
-        LineChart<Number,Number> lc = new LineChart<Number,Number>(x, y);
-
-        lc.setTitle("Multiplication Table");
-
-        XYChart.Series sr = new XYChart.Series();
+        linec.Series sr = new XYChart.Series();
         ArrayList<Integer> al = t.getA();
         for (int j : al ){
             sr.getData().add(new XYChart.Data(al.indexOf(j), j));
         }
 
 
-        Group gp = new Group();
-        gp.getChildren().add(lc);
-
-        Scene sc = new Scene(gp, 550, 400);
-        lc.getData().add(sr);
-        stage.setScene(sc);
+        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
+        stage.setTitle("Hello!");
+        stage.setScene(scene);
         stage.show();
     }
 

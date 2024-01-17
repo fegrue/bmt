@@ -1,7 +1,10 @@
 package org.fegrue.bmt;
 
+import javafx.beans.Observable;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.chart.LineChart;
+import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -15,7 +18,6 @@ public class MainController {
     @FXML
     private Button refresh;
 
-
     @FXML
     private LineChart<Integer, Integer> linec;
 
@@ -24,15 +26,19 @@ public class MainController {
         welcomeText.setText("Welcome to JavaFX Application!");
     }
 
-
     @FXML
     protected void onRefresh(){
-
-
-        ArrayList<Integer> al = t.getA();
+        Test(15);
+        }
+    public void Test(int value){
+        MultiplicationTable m = new MultiplicationTable(10, 100, value);
+        linec.setTitle("Multiplication Table");
+        XYChart.Series<Integer, Integer> sr = new XYChart.Series<Integer, Integer>();
+        ArrayList<Integer> al = m.getA();
         for (int j : al ){
-            linec.getData().add(new XYChart.Data(al.indexOf(j), j));
+            sr.getData().add(new XYChart.Data<Integer, Integer>(al.indexOf(j), j));
+        }
+        linec.getData().add(sr);
         }
     }
 
-}

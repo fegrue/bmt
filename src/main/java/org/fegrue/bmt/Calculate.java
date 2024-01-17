@@ -1,17 +1,15 @@
 package org.fegrue.bmt;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 
-public class calculate {
+public class Calculate {
     int max;
     int min;
     public ArrayList<Integer> l = new ArrayList<Integer>();
-    public calculate(int min, int max){
+    public Calculate(int min, int max){
         this.max = max;
         this.min = min;
-
             }
     public void createArray(){
         for(int i = min;i < max;i++) {

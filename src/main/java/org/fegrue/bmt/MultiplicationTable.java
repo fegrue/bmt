@@ -1,9 +1,12 @@
 package org.fegrue.bmt;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class MultiplicationTable {
+public class MultiplicationTable implements EventHandler<ActionEvent> {
 
     private int max;
     private int min;
@@ -13,6 +16,7 @@ public class MultiplicationTable {
     ArrayList<Integer> grid;
     MultiplicationTable( int min, int max, int parts) {
         calculate(min, max);
+        createArray();
         int num = l.getLast() / parts;
         grid = new ArrayList<Integer>(parts);
         for (int i = 1; i <= parts; i++) {
@@ -61,4 +65,8 @@ public class MultiplicationTable {
         return l.getLast();
     }
 
+    @Override
+    public void handle(ActionEvent actionEvent) {
+
+    }
 }

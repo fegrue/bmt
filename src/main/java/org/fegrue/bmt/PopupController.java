@@ -1,8 +1,12 @@
 package org.fegrue.bmt;
 
+import javafx.event.ActionEvent;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.chart.LineChart;
@@ -20,7 +24,7 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 
-public class PopupController  {
+public class PopupController {
 
     Stage mainStage;
 
@@ -41,8 +45,12 @@ public class PopupController  {
         FXMLLoader main = new FXMLLoader(HelloApplication.class.getResource("main.fxml"));
         root = main.load();
         MainController m = main.getController();
+        m.Test(spinner.getValue());
+        Stage stage = (Stage) spinner.getScene().getWindow();
+        // do what you have to do
+        stage.close();
 
-            m.Test(spinner.getValue());
-            throw new Exception("Test");
+
+
     }
 }

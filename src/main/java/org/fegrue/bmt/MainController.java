@@ -8,6 +8,7 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.stage.Stage;
 
 import java.util.ArrayList;
 
@@ -27,10 +28,10 @@ public class MainController {
     }
 
     @FXML
-    protected void onRefresh(){
+    protected void onRefresh() throws Exception {
         Test(15);
         }
-    public void Test(int value){
+    public void Test(int value) throws Exception {
         MultiplicationTable m = new MultiplicationTable(10, 100, value);
         linec.setTitle("Multiplication Table");
         XYChart.Series<Integer, Integer> sr = new XYChart.Series<Integer, Integer>();

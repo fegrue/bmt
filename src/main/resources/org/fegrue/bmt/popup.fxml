@@ -1,18 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.util.* ?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.AnchorPane?>
+
 <?import javafx.scene.text.Text?>
+<?import javafx.scene.control.* ?>
+<?import javafx.scene.layout.* ?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="152.0" prefWidth="396.0" xmlns="http://javafx.com/javafx/21.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.fegrue.bmt.PopupController">
    <children>
-      <Spinner fx:id="spinner" initialValue="10" editable="true" layoutX="114.0" layoutY="43.0" >
+      <Spinner fx:id="spinner" editable="true" layoutX="114.0" layoutY="43.0" >
          <valueFactory>
-            <SpinnerValueFactory.IntegerSpinnerValueFactory min="0" max="100" initialValue="10" />
+            <SpinnerValueFactory.IntegerSpinnerValueFactory min="0" max="10"/>
          </valueFactory>
       </Spinner>
       <ProgressBar fx:id="progressbar" layoutX="99.0" layoutY="76.0" prefWidth="200.0" progress="0.0" />

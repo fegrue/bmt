@@ -40,6 +40,7 @@ public class MainController {
             sr.getData().add(new XYChart.Data<Integer, Integer>(al.indexOf(j), j));
         }
         linec.getData().add(sr);
+
         }
     }
 

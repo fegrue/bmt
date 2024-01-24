@@ -3,7 +3,9 @@ package org.fegrue.bmt;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.util.Collections;
@@ -26,37 +28,48 @@ public class HelloApplication extends Application {
 
 
     public void start(Stage stage) {
-        calculate c = new calculate( 11, 100);
+        calculate c = new calculate(11, 100);
         c.createArray();
         table t = new table(c.l, 50);
 
-        stage.setTitle("Multiplication table");
-        // x-axis representation
-        NumberAxis x = new NumberAxis();
-        x.setLabel("Total Number of ");
+        stage.setTitle("Multiplication Table");
 
-        // y axis representation
+        // Create a VBox to arrange the TextField and Button
+        VBox rightPanel = new VBox();
+
+        // Create a TextField for user input
+        TextField inputField = new TextField();
+        inputField.setPromptText("Enter a number:");
+
+        // Create a Button to display the multiplication table for the entered number
+        Button displayButton = new Button("Display");
+        displayButton.setOnAction((event) -> {
+            int number = Integer.parseInt(inputField.getText());
+            XYChart.Series sr = new XYChart.Series();
+            ArrayList<Integer> al = t.getMultiplicationTable(number, 50);
+            for (int j : al) {
+                sr.getData().add(new XYChart.Data(j, al.indexOf(j)));
+            }
+            lc.getData().setAll(sr);
+        });
+
+        rightPanel.getChildren().addAll(inputField, displayButton);
+
+        // Create the main scene
+        NumberAxis x = new NumberAxis();
+        x.setLabel("Total Number of Students");
         NumberAxis y = new NumberAxis();
         y.setLabel("Students per section");
 
-        LineChart<Number,Number> lc = new LineChart<Number,Number>(x, y);
-
+        LineChart<Number, Number> lc = new LineChart<>(x, y);
         lc.setTitle("Multiplication Table");
 
-        XYChart.Series sr = new XYChart.Series();
-        ArrayList<Integer> al = t.getA();
-        for (int j : al ){
-            sr.getData().add(new XYChart.Data(al.indexOf(j), j));
-        }
-
-
+        // Add the main chart to the scene
         Group gp = new Group();
-        gp.getChildren().add(lc);
+        gp.getChildren().addAll(lc, rightPanel);
 
         Scene sc = new Scene(gp, 550, 400);
-        lc.getData().add(sr);
+
         stage.setScene(sc);
         stage.show();
     }
-
-}

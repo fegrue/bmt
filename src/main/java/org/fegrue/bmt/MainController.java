@@ -1,18 +1,14 @@
 package org.fegrue.bmt;
 
-import javafx.beans.Observable;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.chart.LineChart;
-import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.stage.Stage;
 
 import java.util.ArrayList;
 
-public class MainController {
+public class MainController implements Observer {
     @FXML
     private Label welcomeText;
 
@@ -41,5 +37,11 @@ public class MainController {
         }
         linec.getData().add(sr);
         }
+
+    @Override
+    public void LineChartChanged(LineChart<Integer, Integer> rule) {
+        linec = rule;
+        notifyApp();
     }
+}
 

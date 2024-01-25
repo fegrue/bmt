@@ -11,13 +11,12 @@ public class MultiplicationTable {
 
     private int max;
     private int min;
-
     private int parts;
-
     private ArrayList<Integer> grid;
+    public ArrayList<Integer> l = new ArrayList<>();
+    ArrayList<Integer> solution = new ArrayList<>();
 
-    public ArrayList<Integer> l = new ArrayList<Integer>();
-    ArrayList<Integer> solution = new ArrayList<Integer>();
+
     MultiplicationTable( int min, int max, int parts) {
         this.max = max;
         this.min = min;
@@ -31,12 +30,7 @@ public class MultiplicationTable {
         }
         Collections.sort(l);
 
-        createGrid(parts);
-
-        for (int i = 1; i <= parts; i++) {
-            solution.add(0);
-        }
-        fillSolution();
+        fillgrid();
     }
 
 
@@ -47,30 +41,36 @@ public class MultiplicationTable {
 
     private void createGrid(int parts){
         int num = l.getLast() / parts;
-        solution = new ArrayList<Integer>(parts);
-        grid = new ArrayList<Integer>(parts);
+        grid = new ArrayList<>(parts);
         for (int i = 1; i <= parts; i++) {
             grid.add(num * i);
         }
-
     }
 
+
+    private void fillgrid(){
+        createGrid(parts);
+        for (int i = 1; i <= parts; i++) {
+            solution.add(0);
+        }
+        fillSolution();
+    }
 
     private void fillSolution(){
         for (int i : l) {
             int cp = calculatePart(i);
-            solution.set(cp, solution.get(cp)+1);
+            this.solution.set(cp, solution.get(cp)+1);
         }
     }
 
 
     public ArrayList<Integer> setGrid(int b){
-        for ( int i = 0; i< this.parts; i++ ){
-            solution.set(i, 0);
+        parts = b;
+        int size = solution.size();
+        for (int i = 0;i< size; i++){
+            solution.removeLast();
         }
-        solution = new ArrayList<Integer>(parts);
-        createGrid(b);
-        fillSolution();
+        fillgrid();
         return solution;
     }
 

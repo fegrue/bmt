@@ -2,13 +2,18 @@ package org.fegrue.bmt;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
+import java.io.StreamCorruptedException;
 import java.util.Collections;
 
 import java.util.Arrays;
@@ -34,18 +39,22 @@ public class HelloApplication extends Application {
         stage.setTitle("Multiplication Table");
 
         // Create a VBox to arrange the TextField and Button
-        VBox rightPanel = new VBox();
+        GridPane grid = new GridPane();
+        grid.setHgap(10);
+        grid.setVgap(10);
+        grid.setPadding(new Insets(0, 10, 0, 10));
 
         // Create a TextField for user input
         TextField inputField = new TextField();
         inputField.setPromptText("Enter a number:");
+        inputField.setPadding(new Insets(10));
 
 
         // Create the main scene
         NumberAxis x = new NumberAxis();
-        x.setLabel("Total Number of Students");
+        x.setLabel("Nummer der Raster");
         NumberAxis y = new NumberAxis();
-        y.setLabel("Students per section");
+        y.setLabel("Anzahl der in dem Raster vorhandenen Datensätze");
 
         LineChart<Number, Number> lc = new LineChart<>(x, y);
 
@@ -66,21 +75,21 @@ public class HelloApplication extends Application {
             for (int j : al) {
                 sr.getData().add(new XYChart.Data(al.indexOf(j), j));
             }
-
             lc.getData().setAll(sr);
         });
 
-        rightPanel.getChildren().addAll(inputField, displayButton);
+        HBox hbox = new HBox(2);
 
+        VBox b = new VBox(2);
+        b.setPadding(new Insets(10));
+        b.setAlignment(Pos.CENTER);
+        b.getChildren().addAll(inputField, displayButton);
 
+        hbox.getChildren().addAll(lc, b);
 
         lc.setTitle("Multiplication Table");
 
-        // Add the main chart to the scene
-        Group gp = new Group();
-        gp.getChildren().addAll(lc, rightPanel);
-
-        Scene sc = new Scene(gp, 550, 400);
+        Scene sc = new Scene(hbox, 550, 400);
 
         stage.setScene(sc);
         stage.show();
